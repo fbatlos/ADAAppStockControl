@@ -7,7 +7,7 @@ import org.example.EntityManagerFactory
 class UsuarioRepository(val em: EntityManager) {
 
 
-    private fun getUsuario(nombre_PosibleUSuario: String) :Usuario? {
+    fun getUsuario(nombre_PosibleUSuario: String) :Usuario? {
         try {
             val usuarioFromBD = em.find(Usuario::class.java, nombre_PosibleUSuario)
             return usuarioFromBD
@@ -18,11 +18,5 @@ class UsuarioRepository(val em: EntityManager) {
         }
     }
 
-    fun comprobarUsuario(usuario: Usuario): Boolean {
-        val getPosibleUsuario = getUsuario(usuario.nombre_user)
 
-        if (getPosibleUsuario != null && getPosibleUsuario.password == usuario.password){
-            return true
-        }else return false
-    }
 }

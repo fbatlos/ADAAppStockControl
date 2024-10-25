@@ -1,4 +1,6 @@
 ﻿package org.example.Repository
 
-class ProductoRepository {
+import jakarta.persistence.EntityManager
+
+class ProductoRepository(em: EntityManager) {
 }

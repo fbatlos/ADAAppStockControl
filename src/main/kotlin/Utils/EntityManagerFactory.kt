@@ -4,9 +4,8 @@ import jakarta.persistence.EntityManager
 import jakarta.persistence.Persistence
 
 object EntityManagerFactory {
-
-    fun createManager(persistenceUnitName:String): EntityManager {
-        val emf = Persistence.createEntityManagerFactory(persistenceUnitName)
+    val emf = Persistence.createEntityManagerFactory("unidadMYSQL2")
+    fun createManager(): EntityManager {
         return emf.createEntityManager()
     }
 }
