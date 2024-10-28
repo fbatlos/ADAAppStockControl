@@ -1,5 +1,8 @@
 package org.example
 
+import org.example.ControlerService.MenuService
+import org.example.ControlerService.ProductoService
+import org.example.ControlerService.ProveedorService
 import org.example.ControlerService.UsuarioService
 import org.example.Entity.Producto
 import org.example.Entity.Proveedor
@@ -16,22 +19,28 @@ fun main() {
     val em = EntityManagerFactory.createManager()
     val consola = Consola()
 
-    val userDao = UsuarioRepository(em)
-    val productoDao = ProductoRepository(em)
-    val proveedorDao = ProveedorRepository(em)
+    val userDao = UsuarioRepository()
+    val productoDao = ProductoRepository()
+    val proveedorDao = ProveedorRepository()
 
     val usuarioService = UsuarioService(userDao)
+    val productoService = ProductoService(productoDao)
+    val proveedorService = ProveedorService(proveedorDao)
+
     val proveedor = Proveedor(nombre = "Pasta SA", direccion = "A.V Risqueto", productos = null)
     em.transaction.begin()
     em.persist(proveedor)
     em.persist(Proveedor(nombre = "Lorca SA", direccion = "A.V Risqueto", productos = null))
+    em.persist(Producto("ALUMATTEC","Material","Aluminio","Aluminio bro",12f,13.4f, Date(),47,proveedor))
+    em.persist(Usuario("paco","123"))
 
     em.transaction.commit()
-
-    val proveedores = proveedorDao.GetProveedores()
-
-    proveedores.forEach { consola.Escribir("${it.nombre} con id ${it.id}") }
-
     em.close()
+
+    val menu = MenuService(consola,usuarioService,productoService,proveedorService).Menu()
+    consola.Escribir(menu)
+
+
+
 
 }

@@ -3,10 +3,12 @@
 import jakarta.persistence.EntityManager
 import org.example.Entity.Producto
 import org.example.Entity.Proveedor
+import org.example.EntityManagerFactory
 
-class ProductoRepository(val em: EntityManager) {
+class ProductoRepository {
 
     fun AltaProducto(producto: Producto): String {
+        val em: EntityManager = EntityManagerFactory.createManager()
         try {
             em.transaction.begin()
             em.persist(producto)
@@ -20,13 +22,14 @@ class ProductoRepository(val em: EntityManager) {
         }
     }
 
-    fun BajaProducto(producto: Producto): String {
+    fun BajaProducto(producto_id: String): String {
+        val em: EntityManager = EntityManagerFactory.createManager()
         try {
             em.transaction.begin()
-            val productoFromBD = em.find(Producto::class.java, producto.id)
+            val productoFromBD = em.find(Producto::class.java, producto_id)
             em.remove(productoFromBD)
             em.transaction.commit()
-            return "Se ha dado de baja el producto ${producto.nombre}"
+            return "Se ha dado de baja el producto ${producto_id}"
 
         }catch (e:Exception){
             em.transaction.rollback()
@@ -37,6 +40,7 @@ class ProductoRepository(val em: EntityManager) {
     }
 
     fun UpdateNombreProducto(producto_id: String , nuevoNombre:String):String {
+        val em: EntityManager = EntityManagerFactory.createManager()
         try {
             em.transaction.begin()
             val productoFromBD = em.find(Producto::class.java, producto_id)
@@ -53,6 +57,7 @@ class ProductoRepository(val em: EntityManager) {
     }
 
     fun UpdateStockProducto(producto_id: String , nuevoStock:Int):String {
+        val em: EntityManager = EntityManagerFactory.createManager()
         try {
             em.transaction.begin()
             val productoFromBD = em.find(Producto::class.java, producto_id)
@@ -69,6 +74,7 @@ class ProductoRepository(val em: EntityManager) {
     }
 
     fun GetProducto(producto_id: String):Producto? {
+        val em: EntityManager = EntityManagerFactory.createManager()
         try {
 
             val productoFromBD = em.find(Producto::class.java, producto_id)
@@ -82,6 +88,7 @@ class ProductoRepository(val em: EntityManager) {
     }
 
     fun GetProductosConStock():List<Producto>{
+        val em: EntityManager = EntityManagerFactory.createManager()
         try {
 
             val query = "FROM Producto where stock>0 "
@@ -95,6 +102,7 @@ class ProductoRepository(val em: EntityManager) {
     }
 
     fun GetProductosSinStock():List<Producto>{
+        val em: EntityManager = EntityManagerFactory.createManager()
         try {
 
             val query = "FROM Producto where stock=0 "
@@ -108,7 +116,7 @@ class ProductoRepository(val em: EntityManager) {
     }
 
     fun GetProveedorDeProducto(producto_id: String): Proveedor? {
-
+        val em: EntityManager = EntityManagerFactory.createManager()
         try {
 
             val productoFromBD = em.find(Producto::class.java, producto_id)

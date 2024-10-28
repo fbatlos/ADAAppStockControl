@@ -15,4 +15,7 @@ open class Usuario(
 
     @Column(nullable = false , length = 20)
     var password: String
-)
+){
+    // Constructor sin argumentos
+    constructor() : this("", "")
+}

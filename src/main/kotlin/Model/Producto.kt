@@ -33,7 +33,7 @@ class Producto(
     var stock:Int,
 
     @ManyToOne
-    val proveedor:Proveedor
+    val proveedor:Proveedor?
 ){
-
+    constructor() : this("","","","",0f,0f,Date(),0,null)
 }
