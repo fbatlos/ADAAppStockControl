@@ -15,6 +15,8 @@ class UsuarioRepository(val em: EntityManager) {
         }catch (e : Exception) {
             println(e.message)
             return null
+        }finally {
+            em.close()
         }
     }
 

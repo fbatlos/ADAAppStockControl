@@ -15,7 +15,7 @@ class Producto(
     val categoria:String,
 
     @Column
-    val nombre:String,
+    var nombre:String,
 
     @Column
     val descripcion:String,
@@ -30,7 +30,7 @@ class Producto(
     val fecha_alta:Date,
 
     @Column
-    val stock:Int,
+    var stock:Int,
 
     @ManyToOne
    // @JoinColumn(name = "id_proveedor")
