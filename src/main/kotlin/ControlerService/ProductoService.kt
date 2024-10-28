@@ -40,7 +40,7 @@ class ProductoService(val productoDao: ProductoRepository) {
 
     fun HacerID(nombreProducto:String , categoria:String,nombreProveedor:String):String{
         var idProducto = ""
-        val posibilidadesId = listOf(nombreProducto,categoria,nombreProveedor)
+        val posibilidadesId = listOf(nombreProducto.trim(),categoria.trim(),nombreProveedor.trim())
 
         for (i in 0..2){
             for (j in 0..2){
