@@ -10,10 +10,10 @@ open class Proveedor(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
-    @Column
+    @Column(unique = true,nullable = false, length = 50)
     val nombre: String,
 
-    @Column
+    @Column(nullable = false)
     val direccion: String,
 
     @OneToMany(mappedBy = "proveedor")

@@ -11,29 +11,28 @@ class Producto(
     @Id
     val id:String,
 
-    @Column
+    @Column(nullable = false, length = 10)
     val categoria:String,
 
-    @Column
+    @Column(nullable = false, length = 50)
     var nombre:String,
 
     @Column
     val descripcion:String,
 
-    @Column
+    @Column(nullable = false)
     val precio_sin_iva:Float,
 
-    @Column
+    @Column(nullable = false)
     val precio_con_iva:Float,
 
-    @Column
+    @Column(nullable = false)
     val fecha_alta:Date,
 
-    @Column
+    @Column(nullable = false)
     var stock:Int,
 
     @ManyToOne
-   // @JoinColumn(name = "id_proveedor")
     val proveedor:Proveedor
 ){
 
