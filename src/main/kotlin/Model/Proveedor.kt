@@ -18,4 +18,6 @@ open class Proveedor(
 
     @OneToMany(mappedBy = "proveedor")
     val productos: List<Producto>? = null
-)
+){
+    constructor() : this(null, "", "", listOf())
+}
